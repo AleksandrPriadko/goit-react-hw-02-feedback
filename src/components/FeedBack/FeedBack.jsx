@@ -23,54 +23,43 @@ class FeedBack extends Component {
     }));
   };
 
-  countTotalFeedback = () => {
-    return this.setState((prevState) => {
-      const total = prevState.neutral + prevState.good + prevState.bad;
-      return total;
-    });
-  };
-
-  //   countPositiveFeedbackPercentage = () => {
-  //     return (
-  //       ((this.goodFeedBackBtn() +
-  //         this.neutralFeedBackBtn() +
-  //         this.badFeedBacKBtn()) *
-  //         100) /
-  //       this.countTotalFeedback()
-  //     );
-  //   };
-
   render() {
     const { good, neutral, bad } = this.state;
+    const countTotalFeedback = good + neutral + bad;
     return (
       <div>
         <div>
           <h1>Please leave feedback</h1>
           <button
             type="button"
-            onClick={() => {
-              this.goodFeedBackBtn();
-              this.countTotalFeedback();
-              this.countPositiveFeedbackPercentage();
-            }}
+            onClick={
+              (countTotalFeedback,
+              () => {
+                this.goodFeedBackBtn();
+              })
+            }
           >
             Good
           </button>
           <button
             type="button"
-            onClick={() => {
-              this.neutralFeedBackBtn();
-              this.countTotalFeedback();
-            }}
+            onClick={
+              (countTotalFeedback,
+              () => {
+                this.neutralFeedBackBtn();
+              })
+            }
           >
             Neutral
           </button>
           <button
             type="button"
-            onClick={() => {
-              this.badFeedBacKBtn();
-              this.countTotalFeedback();
-            }}
+            onClick={
+              (countTotalFeedback,
+              () => {
+                this.badFeedBacKBtn();
+              })
+            }
           >
             Bad
           </button>
@@ -82,7 +71,7 @@ class FeedBack extends Component {
           <p>Bad: {bad}</p>
           <p>
             Total:
-            {() => this.countTotalFeedback()}
+            {countTotalFeedback}
           </p>
           <p>Positive feedback: </p>
         </div>

@@ -26,6 +26,10 @@ class FeedBack extends Component {
   render() {
     const { good, neutral, bad } = this.state;
     const countTotalFeedback = good + neutral + bad;
+    let countPositiveFeedbackPercentage = 0;
+    countPositiveFeedbackPercentage = Math.round(
+      (good * 100) / countTotalFeedback
+    );
     return (
       <div>
         <div>
@@ -34,6 +38,7 @@ class FeedBack extends Component {
             type="button"
             onClick={
               (countTotalFeedback,
+              countPositiveFeedbackPercentage,
               () => {
                 this.goodFeedBackBtn();
               })
@@ -45,6 +50,7 @@ class FeedBack extends Component {
             type="button"
             onClick={
               (countTotalFeedback,
+              countPositiveFeedbackPercentage,
               () => {
                 this.neutralFeedBackBtn();
               })
@@ -56,6 +62,7 @@ class FeedBack extends Component {
             type="button"
             onClick={
               (countTotalFeedback,
+              countPositiveFeedbackPercentage,
               () => {
                 this.badFeedBacKBtn();
               })
@@ -73,7 +80,7 @@ class FeedBack extends Component {
             Total:
             {countTotalFeedback}
           </p>
-          <p>Positive feedback: </p>
+          <p>Positive feedback: {countPositiveFeedbackPercentage}% </p>
         </div>
       </div>
     );

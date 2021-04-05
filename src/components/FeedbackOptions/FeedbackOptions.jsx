@@ -1,5 +1,4 @@
 import React from "react";
-import fBOpt from "./feedBackStylemodule.scss";
 import PropTypes from "prop-types";
 
 const FeedbackOptions = ({ options, onLeaveFeedback }) => {
@@ -8,12 +7,7 @@ const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <>
       {buttons.map((button) => (
-        <button
-          type="button"
-          key={button}
-          onClick={onLeaveFeedback}
-          className={fBOpt.btn}
-        >
+        <button type="button" key={button} onClick={onLeaveFeedback}>
           {button.toUpperCase().slice(0, 1) + button.slice(1)}
         </button>
       ))}

@@ -4,7 +4,7 @@ import FeedBack from "./components/FeedBack";
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <FeedBack />
       </div>
     );

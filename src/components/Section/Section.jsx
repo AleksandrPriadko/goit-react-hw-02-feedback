@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 
 const Section = ({ title, children }) => {
   return (
-    <section className="Section">
-      <h2 className="Title">{title}</h2>
+    <section>
+      <h2>{title}</h2>
       {children}
     </section>
   );

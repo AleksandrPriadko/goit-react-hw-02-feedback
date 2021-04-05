@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import Section from "../Section/Section";
+import FeedbackOptions from "../FeedbackOptions/FeedbackOptions";
+import Statistics from "../Statistics/Statistics";
+import Notification from "../Notification";
 
 class FeedBack extends Component {
   state = {
@@ -7,81 +11,45 @@ class FeedBack extends Component {
     bad: 0,
   };
 
-  goodFeedBackBtn = () => {
-    this.setState((prevState) => ({
-      good: prevState.good + 1,
-    }));
-  };
-  neutralFeedBackBtn = () => {
-    this.setState((prevState) => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-  badFeedBacKBtn = () => {
-    this.setState((prevState) => ({
-      bad: prevState.bad + 1,
-    }));
-  };
+  countFeedback = (event) => {
+    const btnName = event.target.textContent.toLowerCase();
 
+    this.setState((prevState) => {
+      for (const key in prevState) {
+        if (key === btnName) {
+          return { [key]: prevState[key] + 1 };
+        }
+      }
+    });
+  };
   render() {
     const { good, neutral, bad } = this.state;
     const countTotalFeedback = good + neutral + bad;
-    let countPositiveFeedbackPercentage = 0;
-    countPositiveFeedbackPercentage = Math.round(
+    const countPositiveFeedbackPercentage = Math.round(
       (good * 100) / countTotalFeedback
     );
+
     return (
       <div>
-        <div>
-          <h1>Please leave feedback</h1>
-          <button
-            type="button"
-            onClick={
-              (countTotalFeedback,
-              countPositiveFeedbackPercentage,
-              () => {
-                this.goodFeedBackBtn();
-              })
-            }
-          >
-            Good
-          </button>
-          <button
-            type="button"
-            onClick={
-              (countTotalFeedback,
-              countPositiveFeedbackPercentage,
-              () => {
-                this.neutralFeedBackBtn();
-              })
-            }
-          >
-            Neutral
-          </button>
-          <button
-            type="button"
-            onClick={
-              (countTotalFeedback,
-              countPositiveFeedbackPercentage,
-              () => {
-                this.badFeedBacKBtn();
-              })
-            }
-          >
-            Bad
-          </button>
-        </div>
-        <div>
-          <h1>Statistics</h1>
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
-          <p>
-            Total:
-            {countTotalFeedback}
-          </p>
-          <p>Positive feedback: {countPositiveFeedbackPercentage}% </p>
-        </div>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.countFeedback}
+          />
+        </Section>
+        <Section title="Statistics">
+          {countTotalFeedback !== 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={countTotalFeedback}
+              positivePercentage={countPositiveFeedbackPercentage}
+            />
+          ) : (
+            <Notification message="No feedback given" />
+          )}
+        </Section>
       </div>
     );
   }

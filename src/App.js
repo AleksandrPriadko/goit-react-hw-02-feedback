@@ -1,12 +1,14 @@
-import React from "react";
-import FeedBack from "./components/FeedBack/FeedBack";
+import React, { Component } from "react";
+import FeedBack from "./components/FeedBack";
 
-function App() {
-  return (
-    <div className="App">
-      <FeedBack />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <FeedBack />
+      </div>
+    );
+  }
 }
 
 export default App;
